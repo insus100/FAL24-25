@@ -7,53 +7,64 @@
 #include <fstream>
 #include <vector>
 
-struct Sol {
-    bool extranio;
-    int sumPares;
-    int sumImpares;
-    int prodPares;
-    int prodImpares;
-};
 using namespace std;
+
+struct Sol {
+    int menor;
+    int apariciones;
+};
+
 // función que resuelve el problema
 Sol resolver(vector<int> const &v, int ini, int fin) {
     if (ini == fin) {
-        if (v[ini] % 2 == 0) return { true, v[ini], 0,  v[ini], 1};
-        else return { true, 0, v[ini], 1, v[ini] };
+        return { v[ini], 1 };
+    }
+    else if (ini + 1 == fin) {
+        if (v[ini] < v[fin]) return { v[ini], 1 };
+        else if (v[ini] > v[fin]) return { v[fin], 1 };
+        else return { v[ini], 2 };
     }
     else {
-            int m = (ini + fin) / 2;
-            
-            Sol izq = resolver(v, ini, m);
-            Sol der = resolver(v, m + 1, fin);
+        int m = (ini + fin) / 2;
 
-            bool extranio = (izq.sumPares + izq.prodImpares <= der.prodPares + der.sumImpares) &&
-                (izq.extranio || der.extranio);
-
-            return {
-                extranio,
-                izq.sumPares + der.sumPares,
-                izq.sumImpares + der.sumImpares,
-                izq.prodPares* der.prodPares,
-                izq.prodImpares * der.prodImpares,
-            };
+        Sol izq = resolver(v, ini, m);
+        Sol der = resolver(v, m + 1, fin);
+        Sol res;
+        if (izq.menor < der.menor) {
+            res = izq;
+        }
+        else if (izq.menor > der.menor) {
+            res = der;
+        }
+        else {
+            res.menor = izq.menor;
+            res.apariciones = izq.apariciones + der.apariciones;
+        }
+        return res;
     }
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
-void resuelveCaso() {
+bool resuelveCaso() {
     // leer los datos de la entrada
     int n;
     cin >> n;
-
+    if (n == -1)
+        return false;
+    if (n == 0) {
+        cout << "0\n";
+        return true;
+    }
     vector<int> v(n);
-    for (int& c : v)
+    for (int &c : v)
         cin >> c;
 
     Sol sol = resolver(v, 0, n - 1);
+
     // escribir sol
-    sol.extranio ? cout << "SI\n" : cout << "NO\n";
+    cout << sol.apariciones << "\n";
+    return true;
 }
 
 int main() {
@@ -65,10 +76,8 @@ int main() {
 #endif 
 
 
-    int numCasos;
-    std::cin >> numCasos;
-    for (int i = 0; i < numCasos; ++i)
-        resuelveCaso();
+    while (resuelveCaso())
+        ;
 
 
     // Para restablecer entrada. Comentar para acepta el reto

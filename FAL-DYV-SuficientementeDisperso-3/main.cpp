@@ -6,48 +6,49 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
+#include <cmath>
 
 struct Sol {
-    int max;
-    int min;
-    bool ordenado;
+    bool disperso;
+    int primer;
+    int ultimo;
 };
 using namespace std;
 // función que resuelve el problema
-Sol resolver(vector<int> const &v, int ini, int fin) {
+
+Sol resolver(vector<int> const& v, int ini, int fin, int const K) {
     if (ini == fin) {
-        return { v[ini], v[ini], true };
+        // Un único elemento siempre es suficientemente disperso
+        return { true, v[ini], v[ini] };
     }
-    else {
-        int m = (ini + fin) / 2;
 
-        Sol izq = resolver(v, ini, m);
-        Sol der = resolver(v, m + 1, fin);
+    int m = (ini + fin) / 2;
 
-        bool ord = der.max >= izq.min && izq.min <= der.min;
+    Sol izq = resolver(v, ini, m, K);
+    Sol der = resolver(v, m + 1, fin, K);
 
-        bool cumple = ord && der.ordenado && izq.ordenado;
+    bool actualDisperso = abs(v[ini] - v[fin]) >= K;
+    bool esDisperso = actualDisperso && izq.disperso && der.disperso;
 
-        return { max(izq.max, der.max), min(izq.min, der.min), cumple };
-    }
+    return { esDisperso, v[ini], v[fin] };
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
     // leer los datos de la entrada
-    vector<int> v;
-    int c;
-    cin >> c;
-    if (c == 0) return false;
-    while (c != 0) {
-        v.push_back(c);
-        cin >> c;
-    }
+    int n, K;
+    cin >> n >> K;
+    if (!std::cin)
+        return false;
 
-    Sol sol = resolver(v, 0, v.size() - 1);
+    vector<int> v(n);
+    for (int& c : v)
+        cin >> c;
+
+    Sol sol = resolver(v, 0, n - 1, K);
     // escribir sol
-    sol.ordenado ? cout << "SI\n" : cout << "NO\n";
+    sol.disperso ? cout << "SI\n" : cout << "NO\n";
     return true;
 
 }

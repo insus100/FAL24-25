@@ -7,47 +7,26 @@
 #include <fstream>
 #include <vector>
 
-struct Sol {
-    int max;
-    int min;
-    bool ordenado;
-};
 using namespace std;
 // función que resuelve el problema
-Sol resolver(vector<int> const &v, int ini, int fin) {
-    if (ini == fin) {
-        return { v[ini], v[ini], true };
-    }
-    else {
-        int m = (ini + fin) / 2;
+TipoSolucion resolver(TipoDatos datos) {
 
-        Sol izq = resolver(v, ini, m);
-        Sol der = resolver(v, m + 1, fin);
 
-        bool ord = der.max >= izq.min && izq.min <= der.min;
-
-        bool cumple = ord && der.ordenado && izq.ordenado;
-
-        return { max(izq.max, der.max), min(izq.min, der.min), cumple };
-    }
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
     // leer los datos de la entrada
-    vector<int> v;
-    int c;
-    cin >> c;
-    if (c == 0) return false;
-    while (c != 0) {
-        v.push_back(c);
-        cin >> c;
-    }
 
-    Sol sol = resolver(v, 0, v.size() - 1);
+    if (!std::cin)
+        return false;
+
+    TipoSolucion sol = resolver(datos);
+
     // escribir sol
-    sol.ordenado ? cout << "SI\n" : cout << "NO\n";
+
+
     return true;
 
 }
