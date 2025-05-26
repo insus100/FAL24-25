@@ -12,12 +12,16 @@ using namespace std;
 struct voluntario {
     vector<int> kilos;
 };
-bool es_Valida(vector<int> const& acum, int n_volunt, int enviados, int l_cupo, int limpias, int recogido, int max_basura) {
+bool es_Valida(vector<int> const& acum, int n_volunt, int enviados, int l_cupo, int limpias, int recogido_bruto, int max_basura) {
     //
     // recogido + maxBasura para hacer el optimo
     // si el numero de enviados que me quedan con el numero de voluntarios que hay con el cupo de playas es suficiente para limpiarlas todas
     //
-    if (recogido + acum[enviados] < max_basura) return false;
+    if ((l_cupo - limpias) > (n_volunt - enviados)) { return false; }// no me quedan voluntarios
+    if (enviados != (n_volunt - 1)) {
+        if ((recogido_bruto + acum[enviados + 1]) < max_basura) { return false; }//Poda de optimos
+    }
+    return true;
 }
 // función que resuelve el problema
 void limpiar(vector<voluntario> const &voluntarios, vector<int> &playas, vector<int> const &acum, int n_volunt, int m_playas, int l_cupo, int enviados, int recogido, int limpias, int &max_limpias, int &max_basura, bool &posible) {
@@ -30,12 +34,20 @@ void limpiar(vector<voluntario> const &voluntarios, vector<int> &playas, vector<
             if (es_Valida(acum, n_volunt, enviados, l_cupo, limpias, recogido + aqui_recogido, max_basura)) {
                 playas[i] -= aqui_recogido;
                 if (playas[i] == 0) { ++local_limpias; }
-                if (enviados == (n_volunt - 1)) {
+                if (enviados == (n_volunt - 1)) {//Se han enviado todos los voluntarios
                     //actualizar solucion, miramos si cumple el cupo, si cumple, mido si es mejor sol.
                     //activar posible = true;
-                    if (local_limpias > l_cupo) {
-                        if (local_limpias > limpias) limpias = local_limpias;
+                    if (local_limpias >= l_cupo) {//Se cumple el cupo, me la quedo
                         posible = true;
+                        if ((recogido + aqui_recogido) > max_basura) {
+                            max_limpias = local_limpias;
+                            max_basura = recogido + aqui_recogido;
+                        }
+                        else if (((recogido + aqui_recogido) == max_basura) && (local_limpias > max_limpias)) {
+                            //Empata, pero tiene mas limpias
+                            //el 4º caso de prueba deberia dar 14,1
+                            max_limpias = local_limpias;
+                        }
                     }
                 }
                 else {
