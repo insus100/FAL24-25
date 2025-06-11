@@ -1,0 +1,11 @@
+3
+4 3
+A C G T
+A G T
+2 3
+A T
+A C G
+3 4
+A C T
+A G G T
+0 0
