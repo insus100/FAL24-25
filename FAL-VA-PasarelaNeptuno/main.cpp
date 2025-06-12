@@ -48,9 +48,6 @@ bool resuelveCaso() {
     // Leer el tamaño de las matrices
     cin >> n;
 
-    if (!cin) // Si no hay más datos, terminar
-        return false;
-
     vector<vector<int>> trajes(n, vector<int>(n));
     vector<vector<int>> zapatos(n, vector<int>(n));
     vector<bool> marcasT(n, false), marcasZ(n, false);
