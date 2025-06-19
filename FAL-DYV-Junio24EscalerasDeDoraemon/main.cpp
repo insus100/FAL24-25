@@ -9,7 +9,7 @@
 
 using namespace std;
 // función que resuelve el problema
-void resolver(vector<int> const &n, vector<int> const&g, int c, int f, bool &hablan, int &escalon) {
+void resolver(vector<int> const& n, vector<int> const& g, int c, int f, bool& hablan, int& escalon) {
     if (c == f + 1) {
         hablan = false;
         escalon = f;

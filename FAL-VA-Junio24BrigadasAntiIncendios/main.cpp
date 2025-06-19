@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void asignar_vigilantes(vector<vector<int>> const& distancias, vector<int> const& tamMinimo, vector<int> &vig_por_brigada, int &necesarios, int distMaxima, int &num_completadas, int k, int n, int m, int &min_actual, int & min_global, vector<int> const &dist_min_acum) {
+void asignar_vigilantes(vector<vector<int>> const& distancias, vector<int> const& tamMinimo, vector<int>& vig_por_brigada, int& necesarios, int distMaxima, int& num_completadas, int k, int n, int m, int& min_actual, int& min_global, vector<int> const& dist_min_acum) {
 
     for (int i = 0; i < n; i++) {
         if (distancias[k][i] <= distMaxima) {

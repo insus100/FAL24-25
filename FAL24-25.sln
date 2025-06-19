@@ -165,6 +165,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FAL-REC-Enero24DiferenciaMa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FAL-VA-Enero24AsignaturasYCreditos", "FAL-VA-Enero24AsignaturasYCreditos\FAL-VA-Enero24AsignaturasYCreditos.vcxproj", "{4561CCC2-6A21-4611-9998-C6344973DAE6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FAL-VA-EVAL-EConvite", "FAL-VA-EVAL-EConvite\FAL-VA-EVAL-EConvite.vcxproj", "{CC652168-209E-44C2-9CB1-DEDD537A550C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -821,6 +823,14 @@ Global
 		{4561CCC2-6A21-4611-9998-C6344973DAE6}.Release|x64.Build.0 = Release|x64
 		{4561CCC2-6A21-4611-9998-C6344973DAE6}.Release|x86.ActiveCfg = Release|Win32
 		{4561CCC2-6A21-4611-9998-C6344973DAE6}.Release|x86.Build.0 = Release|Win32
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Debug|x64.ActiveCfg = Debug|x64
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Debug|x64.Build.0 = Debug|x64
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Debug|x86.ActiveCfg = Debug|Win32
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Debug|x86.Build.0 = Debug|Win32
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Release|x64.ActiveCfg = Release|x64
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Release|x64.Build.0 = Release|x64
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Release|x86.ActiveCfg = Release|Win32
+		{CC652168-209E-44C2-9CB1-DEDD537A550C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

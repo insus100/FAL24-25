@@ -52,10 +52,10 @@ using namespace std;
 * { K >= 3 && long(v) >= k
 * fun contarSegmentos(v, k) ret int cantidad
 * { cantidad = #w : k <= w <= long(v) : noMasdeDos(v, w - k, w) }
-* 
+*
 * Invariante = Debilitar la postcondicion, es decir, cambiar la longitud del vector por el indice por el momento
 * I = cantidad = #u : k <= u <= w : noMasdeDos(v, u - k, u)
-* 
+*
 * seg = max u: 0 <= u <= w - 3 && v[u] < v[u + 1] < v[u + 2] : u
 */
 
